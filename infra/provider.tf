@@ -15,3 +15,5 @@ provider "google" {
   region      = var.gcp_region
   version     = "~> 3.19"
 }
+
+data "google_project" "this" {}
