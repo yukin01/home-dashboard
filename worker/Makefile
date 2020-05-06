@@ -16,3 +16,9 @@ build:
 
 push:
 	docker push $(IMAGE_NAME):$(IMAGE_TAG)
+
+run:
+	docker run -it --rm -p 8080:8080 $(IMAGE_NAME):$(IMAGE_TAG)
+
+test:
+	go test -v ./...

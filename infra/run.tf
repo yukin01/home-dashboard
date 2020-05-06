@@ -6,7 +6,11 @@ resource "google_cloud_run_service" "worker" {
   template {
     spec {
       containers {
-        image = "gcr.io/cloudrun/hello"
+        image = "us.gcr.io/${var.gcp_project}/worker:latest"
+        env {
+          name  = "REMO_ACCESS_TOKEN"
+          value = var.remo_access_token
+        }
       }
     }
   }

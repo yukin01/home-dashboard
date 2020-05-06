@@ -1,2 +1,3 @@
-gcp_project = ""
-gcp_region  = ""
+gcp_project       = ""
+gcp_region        = ""
+remo_access_token = ""
