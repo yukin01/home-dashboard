@@ -1,9 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
+	"time"
+
+	"cloud.google.com/go/firestore"
 
 	"github.com/yukin01/home-dashboard/worker/remo"
 )
@@ -22,5 +26,31 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("[Error]", err)
 		return
 	}
-	fmt.Println("[Info]", devices)
+	fmt.Printf("[Info] %#v\n", devices)
+
+	if err = add(ctx, devices); err != nil {
+		fmt.Println("[Error]", err)
+	}
+}
+
+func add(ctx context.Context, devices []*remo.Device) error {
+	client, err := firestore.NewClient(ctx, "yukin01-home-dashboard")
+	if err != nil {
+		return fmt.Errorf("failed to create firestore client: %s", err)
+	}
+
+	defer client.Close()
+
+	for _, d := range devices {
+		doc := client.Collection("devices").Doc(d.ID)
+		event := &struct {
+			remo.NewestEvents
+			createdAt time.Time `firestore:"created_at"`
+		}{d.NewestEvents, time.Now()}
+		_, _, err = doc.Collection("events").Add(ctx, event)
+		if err != nil {
+			return fmt.Errorf("Failed adding event: %v", err)
+		}
+	}
+	return nil
 }

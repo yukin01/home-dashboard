@@ -22,8 +22,8 @@ func NewClient(token string) *Client {
 }
 
 // GetDevices return remo devices with newest sensor values
-func (c *Client) GetDevices(ctx context.Context) ([]Device, error) {
-	var devices []Device
+func (c *Client) GetDevices(ctx context.Context) ([]*Device, error) {
+	var devices []*Device
 
 	url := c.baseURL + "/devices"
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
