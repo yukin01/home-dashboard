@@ -5,3 +5,8 @@ resource "google_project_iam_member" "pubsub_token_creator" {
   role   = "roles/iam.serviceAccountTokenCreator"
   member = "serviceAccount:service-${data.google_project.this.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
 }
+
+resource "google_project_iam_member" "cloud_run_firestore_user" {
+  role   = "roles/datastore.user"
+  member = "serviceAccount:${google_service_account.worker_run.email}"
+}
