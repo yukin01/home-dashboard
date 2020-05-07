@@ -1,3 +1,4 @@
-gcp_project       = ""
-gcp_region        = ""
-remo_access_token = ""
+gcp_project           = ""
+gcp_region            = ""
+gcp_app_engine_region = ""
+remo_access_token     = ""

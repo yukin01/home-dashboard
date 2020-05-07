@@ -24,3 +24,14 @@ resource "google_pubsub_subscription" "worker" {
     }
   }
 }
+
+resource "google_cloud_scheduler_job" "worker" {
+  name     = "worker-job"
+  schedule = "0 */1 * * *"             # hourly
+  region   = var.gcp_app_engine_region # temporarily
+
+  pubsub_target {
+    topic_name = google_pubsub_topic.worker.id
+    data       = base64encode("Published by Cloud Scheduler")
+  }
+}
