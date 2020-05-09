@@ -16,14 +16,14 @@ type Device struct {
 
 // NewestEvents is the reference key to SensorValue means "te" = temperature, "hu" = humidity, "il" = illumination, "mo" = movement.
 type NewestEvents struct {
-	Temperature  SensorValue `json:"te" firestore:"te"`
-	Humidity     SensorValue `json:"hu" firestore:"hu"`
-	Illumination SensorValue `json:"il" firestore:"il"`
-	Movement     SensorValue `json:"mo" firestore:"mo"`
+	Temperature  SensorValue `json:"te"`
+	Humidity     SensorValue `json:"hu"`
+	Illumination SensorValue `json:"il"`
+	Movement     SensorValue `json:"mo"`
 }
 
 // SensorValue represents value of sensor.
 type SensorValue struct {
-	Value     float64   `json:"val" firestore:"val"`
-	CreatedAt time.Time `json:"created_at" firestore:"created_at"`
+	Value     float64   `json:"val"`
+	CreatedAt time.Time `json:"created_at"`
 }

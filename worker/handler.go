@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -52,15 +51,14 @@ func add(ctx context.Context, devices []*remo.Device) error {
 }
 
 func init() {
-	token := os.Getenv("REMO_ACCESS_TOKEN")
-	if token == "" {
-		panic(errors.New("[Error] remo access token is missing"))
-	}
-	rc = remo.NewClient(token)
-
-	projectID = os.Getenv("PROJECT_ID")
-	if projectID == "" {
-		panic(errors.New("[Error] project ID is missing"))
-	}
+	rc = remo.NewClient(getEnv("REMO_ACCESS_TOKEN"))
+	projectID = getEnv("PROJECT_ID")
 	fmt.Println("[Info] get environment variables successfully")
+}
+
+func getEnv(key string) string {
+	if value, ok := os.LookupEnv(key); ok && value != "" {
+		return value
+	}
+	panic(fmt.Errorf("%s is missing", key))
 }
