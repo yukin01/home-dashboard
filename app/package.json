@@ -1,0 +1,35 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p ${PORT:-8080}",
+    "type-check": "tsc",
+    "clean": "rm -rf .next",
+    "predeploy": "yarn clean && yarn build",
+    "deploy": "gcloud app deploy"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "dependencies": {
+    "next": "^9.3.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "^2.0.5",
+    "typescript": "^3.8.3"
+  }
+}

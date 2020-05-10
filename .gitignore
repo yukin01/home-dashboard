@@ -30,3 +30,6 @@ override.tf.json
 
 # GCP Service account key for Terraform
 service-account.json
+
+node_modules
+.next
