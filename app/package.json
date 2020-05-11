@@ -8,6 +8,9 @@
     "build": "next build",
     "start": "next start -p ${PORT:-8080}",
     "type-check": "tsc",
+    "lint": "eslint '**/*.{ts,tsx}'",
+    "format": "prettier --write '**/*.(ts|tsx|js|json)'",
+    "format-check": "prettier --check '**/*.(ts|tsx|js|json)'",
     "clean": "rm -rf .next",
     "predeploy": "yarn clean && yarn build",
     "deploy": "gcloud app deploy"
