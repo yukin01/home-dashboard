@@ -25,10 +25,11 @@ resource "google_pubsub_subscription" "worker" {
   }
 }
 
+# Any resource that needs App Engine can only be created/updated in the App Engine region.
 resource "google_cloud_scheduler_job" "worker" {
   name     = "worker-job"
-  schedule = "0 */1 * * *"             # hourly
-  region   = var.gcp_app_engine_region # temporarily
+  schedule = "0 */1 * * *" # hourly
+  region   = google_app_engine_application.default.location_id
 
   pubsub_target {
     topic_name = google_pubsub_topic.worker.id

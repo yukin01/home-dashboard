@@ -6,14 +6,14 @@ resource "google_cloud_run_service" "worker" {
   template {
     spec {
       containers {
-        image = "us.gcr.io/${var.gcp_project}/worker:latest"
+        image = "us.gcr.io/${data.google_project.this.project_id}/worker:latest"
         env {
           name  = "REMO_ACCESS_TOKEN"
           value = var.remo_access_token
         }
         env {
           name  = "PROJECT_ID"
-          value = var.gcp_project
+          value = data.google_project.this.project_id
         }
       }
       service_account_name = google_service_account.worker_run.email
