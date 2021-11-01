@@ -29,7 +29,7 @@ resource "google_pubsub_subscription" "worker" {
 resource "google_cloud_scheduler_job" "worker" {
   name     = "worker-job"
   schedule = "0 */1 * * *" # hourly
-  region   = google_app_engine_application.default.location_id
+  region   = google_app_engine_application.this.location_id
 
   pubsub_target {
     topic_name = google_pubsub_topic.worker.id

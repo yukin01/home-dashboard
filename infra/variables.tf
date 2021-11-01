@@ -13,3 +13,7 @@ variable "gcp_app_engine_region" {
 variable "remo_access_token" {
   type = string
 }
+
+variable "custom_domain_name" {
+  type = string
+}
