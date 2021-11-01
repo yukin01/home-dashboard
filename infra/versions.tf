@@ -1,4 +1,5 @@
 terraform {
+  required_version = "1.0.10"
   backend "remote" {
     hostname     = "app.terraform.io"
     organization = "yukin01"
@@ -7,13 +8,17 @@ terraform {
       name = "home-dashboard"
     }
   }
+  required_providers {
+    google = {
+      version = "3.90.0"
+      source  = "hashicorp/google"
+    }
+  }
 }
 
 provider "google" {
-  credentials = file("service-account.json")
-  project     = var.gcp_project
-  region      = var.gcp_region
-  version     = "~> 3.19"
+  project = var.gcp_project
+  region  = var.gcp_region
 }
 
 data "google_project" "this" {}
